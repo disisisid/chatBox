@@ -10,9 +10,20 @@ h1 {
 	text-align: center;
 }
 
-.result {
+.result, .typeBox {
 	padding: 10px;
 	margin: 10px;
 	background: white;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.me{
+	text-align: right;
+}
+
+.typeBox input{
+	width: -webkit-fill-available;
+	height: 30px;
+	outline: none;
+	font-size: 14px;
 }

@@ -1,0 +1,6 @@
+[
+  { "userId": 1, "userName": "Sid", "message": "hello" },
+  { "userId": 2, "userName": "Jack", "message": "hi" },
+  { "userId": 1, "userName": "Sid", "message": "how are you doing?" },
+  { "userId": 2, "userName": "Jack", "message": "great!! What about you?" }
+]
