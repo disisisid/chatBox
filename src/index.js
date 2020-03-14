@@ -1,10 +1,7 @@
 import "./style";
 import { Component, render } from "preact";
-import { License } from "./license";
-import { TypeBox } from "./typeBox";
+import { ChatBox } from "./chatBox";
 import data from "./data.json";
-
-// const SEARCH = "//api.github.com/repos/developit/preact/license";
 
 export default class App extends Component {
   constructor() {
@@ -12,9 +9,16 @@ export default class App extends Component {
     this.state = {
       result: { message: "Nothing to see here" },
       data: data,
-      message: "hello"
+      message: "",
+      users: Array.from(new Set(data.map(o => o.userName))).reduce((acc, v) => {
+        acc[v] = {
+          avatar:
+            "https://i.pravatar.cc/400?img=" + Math.floor(Math.random() * 70)
+        };
+        return acc;
+      }, {})
     };
-    console.log(data);
+    console.log(this.state.users);
   }
 
   typingMessage = event => {
@@ -26,8 +30,20 @@ export default class App extends Component {
       this.setState({
         data: [
           ...this.state.data,
-          { userId: 1, userName: "Sid", message: this.state.message }
-        ]
+          {
+            userId: 1,
+            userName: "Sid",
+            message: this.state.message,
+            time: new Date()
+              .toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+              })
+              .toLowerCase()
+          }
+        ],
+        message: ""
       });
     }
   };
@@ -37,17 +53,17 @@ export default class App extends Component {
   render(props, { result }) {
     return (
       <div>
-        <h1>License</h1>
+        <div class="app-header">sl@ck</div>
 
-        <License result={this.state.data} />
-        {/* <TypeBox /> */}
+        <ChatBox chats={this.state.data} users={this.state.users} />
+
         <div class="typeBox">
           <input
             name="message"
             value={this.state.message}
             onKeyPress={this.typingMessage.bind(this)}
+            autofocus
           />
-          <div>{this.state.message}</div>
         </div>
       </div>
     );
@@ -55,24 +71,3 @@ export default class App extends Component {
 }
 
 render(<App />, document.getElementById("root"));
-
-// fetch(SEARCH)
-//   .then(r => {
-//     const status = r.status;
-
-//     if (status === 400) {
-//       throw new Error("Bad Request");
-//     }
-//     return r;
-//   })
-//   .then(r => r.json())
-//   .then(json => {
-//     this.setState({
-//       result: json || { message: "oh no" }
-//     });
-//   })
-//   .catch(error => {
-//     this.setState({
-//       result: { message: error.message }
-//     });
-//   });

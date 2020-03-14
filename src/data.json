@@ -1,6 +1,26 @@
 [
-  { "userId": 1, "userName": "Sid", "message": "hello" },
-  { "userId": 2, "userName": "Jack", "message": "hi" },
-  { "userId": 1, "userName": "Sid", "message": "how are you doing?" },
-  { "userId": 2, "userName": "Jack", "message": "great!! What about you?" }
+  {
+    "userId": 1,
+    "userName": "Sid",
+    "message": "hello",
+    "time": "10:30 pm"
+  },
+  {
+    "userId": 2,
+    "userName": "Jack",
+    "message": "hi",
+    "time": "10:32 pm"
+  },
+  {
+    "userId": 1,
+    "userName": "Sid",
+    "message": "how are you doing?",
+    "time": "10:37 pm"
+  },
+  {
+    "userId": 2,
+    "userName": "Jack",
+    "message": "great!! What about you?",
+    "time": "10:42 pm"
+  }
 ]
