@@ -10,11 +10,11 @@ export const ChatBox = ({ chats, users }) => {
           return (
             <div
               class={
-                result.userId === 1 ? "messageBox  me" : "messageBox notMe"
+                result.userId === 0 ? "messageBox  me" : "messageBox notMe"
               }
             >
               <span class="avatar">
-                <img src={users[result.userName].avatar} alt="no avatar" />
+                <img src={users[result.userId].avatar} alt="no avatar" />
               </span>
               <span class="chat">
                 <div class="userName">{result.userName}</div>

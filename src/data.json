@@ -1,24 +1,24 @@
 [
   {
-    "userId": 1,
+    "userId": 0,
     "userName": "Sid",
     "message": "hello",
     "time": "10:30 pm"
   },
   {
-    "userId": 2,
+    "userId": 1,
     "userName": "Jack",
     "message": "hi",
     "time": "10:32 pm"
   },
   {
-    "userId": 1,
+    "userId": 0,
     "userName": "Sid",
     "message": "how are you doing?",
     "time": "10:37 pm"
   },
   {
-    "userId": 2,
+    "userId": 1,
     "userName": "Jack",
     "message": "great!! What about you?",
     "time": "10:42 pm"

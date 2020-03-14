@@ -10,19 +10,22 @@ export default class App extends Component {
       result: { message: "Nothing to see here" },
       data: data,
       message: "",
-      users: Array.from(new Set(data.map(o => o.userName))).reduce((acc, v) => {
-        acc[v] = {
-          avatar:
-            "https://i.pravatar.cc/400?img=" + Math.floor(Math.random() * 70)
-        };
-        return acc;
-      }, {})
+      users: Array.from(new Set(data.map(o => [o.userName, o.userId]))).reduce(
+        (acc, v) => {
+          acc[v[1]] = {
+            avatar:
+              "https://i.pravatar.cc/400?img=" + Math.floor(Math.random() * 70),
+            userName: v[0]
+          };
+          return acc;
+        },
+        {}
+      )
     };
     console.log(this.state.users);
   }
 
   typingMessage = event => {
-    console.log(event.target.value);
     this.setState({
       message: event.target.value
     });
@@ -31,8 +34,8 @@ export default class App extends Component {
         data: [
           ...this.state.data,
           {
-            userId: 1,
-            userName: "Sid",
+            userId: 0,
+            userName: this.state.users[0].userName,
             message: this.state.message,
             time: new Date()
               .toLocaleString("en-US", {
@@ -62,6 +65,7 @@ export default class App extends Component {
             name="message"
             value={this.state.message}
             onKeyPress={this.typingMessage.bind(this)}
+            placeholder={"Message" + this.state.users[1].userName}
             autofocus
           />
         </div>
