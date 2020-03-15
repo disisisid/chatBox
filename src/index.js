@@ -7,7 +7,6 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      result: { message: "Nothing to see here" },
       data: data,
       message: "",
       users: Array.from(new Set(data.map(o => [o.userName, o.userId]))).reduce(
@@ -15,14 +14,16 @@ export default class App extends Component {
           acc[v[1]] = {
             avatar:
               "https://i.pravatar.cc/400?img=" + Math.floor(Math.random() * 70),
-            userName: v[0]
+            userName: v[0],
+            userId: v[1]
           };
           return acc;
         },
         {}
-      )
+      ),
+       user: {"avatar":"https://i.pravatar.cc/400?img=9","userName":"Sid","userId":0}
     };
-    console.log(this.state.users);
+    console.log(JSON.stringify(this.state.users));
   }
 
   typingMessage = event => {
@@ -34,8 +35,8 @@ export default class App extends Component {
         data: [
           ...this.state.data,
           {
-            userId: 0,
-            userName: this.state.users[0].userName,
+            userId: this.state.user.userId,
+            userName: this.state.user.userName,
             message: this.state.message,
             time: new Date()
               .toLocaleString("en-US", {
@@ -53,12 +54,22 @@ export default class App extends Component {
       });
     }
   };
-  
-  componentDidMount() {}
 
-  render(props, { result }) {
+  switchUser = data => {
+    console.log(data);
+    this.setState({
+      user: data
+    })
+  }
+
+
+  render(props) {
     return (
       <div class="main-container">
+        <div class="user">Logged in as: {this.state.user.userName}</div>
+        <div class="selectUser">
+          {Object.keys(this.state.users).map(u => this.state.users[u]).map(e => (<span onclick={this.switchUser.bind(this, e)}>{e.userName}</span>))}
+        </div>
         <div class="app-header">sl@ck</div>
 
         <div class="chat-container">
@@ -68,7 +79,7 @@ export default class App extends Component {
               name="message"
               value={this.state.message}
               onKeyPress={this.typingMessage.bind(this)}
-              placeholder={"Message" + this.state.users[1].userName}
+              placeholder="Type Message"
               autofocus
             />
           </div>
