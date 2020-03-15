@@ -47,27 +47,31 @@ export default class App extends Component {
           }
         ],
         message: ""
+      }, () => {
+        var element = document.querySelector(".chatBox");
+        element.scrollTop = element.scrollHeight;
       });
     }
   };
-
+  
   componentDidMount() {}
 
   render(props, { result }) {
     return (
-      <div>
+      <div class="main-container">
         <div class="app-header">sl@ck</div>
 
-        <ChatBox chats={this.state.data} users={this.state.users} />
-
-        <div class="typeBox">
-          <input
-            name="message"
-            value={this.state.message}
-            onKeyPress={this.typingMessage.bind(this)}
-            placeholder={"Message" + this.state.users[1].userName}
-            autofocus
-          />
+        <div class="chat-container">
+          <ChatBox chats={this.state.data} users={this.state.users} />
+          <div class="typeBox">
+            <input
+              name="message"
+              value={this.state.message}
+              onKeyPress={this.typingMessage.bind(this)}
+              placeholder={"Message" + this.state.users[1].userName}
+              autofocus
+            />
+          </div>
         </div>
       </div>
     );
@@ -75,3 +79,5 @@ export default class App extends Component {
 }
 
 render(<App />, document.getElementById("root"));
+
+
