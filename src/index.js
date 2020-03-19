@@ -1,3 +1,4 @@
+// import "preact/debug";
 import "./style";
 import { Component, render } from "preact";
 import { ChatBox } from "./chatBox";
@@ -78,7 +79,7 @@ export default class App extends Component {
             <input
               name="message"
               value={this.state.message}
-              onKeyPress={this.typingMessage.bind(this)}
+              onKeyUp={this.typingMessage.bind(this)}
               placeholder="Type Message"
               autofocus
             />
@@ -89,6 +90,5 @@ export default class App extends Component {
   }
 }
 
-render(<App />, document.getElementById("root"));
 
 

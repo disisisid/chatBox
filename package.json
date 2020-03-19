@@ -1,32 +1,32 @@
 {
-  "name": "preact-code-sandbox",
-  "description": null,
-  "version": "0.0.43",
-  "dependencies": {
-    "js-base64": "2.1.9",
-    "preact": "8.2.1",
-    "preact-compat": "3.17.0"
-  },
-  "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-synacor": "^1.1.0",
-    "if-env": "^1.0.0",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.5",
-    "node-sass": "^4.5.3",
-    "preact-cli": "^1.4.1",
-    "sass-loader": "^6.0.6",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
-  },
+  "private": true,
+  "name": "chatBox",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "test": "eslint . && preact test",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch"
+    "serve": "preact build && sirv build --cors --single",
+    "dev": "preact watch",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"
+  },
+  "eslintIgnore": [
+    "build/*"
+  ],
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-synacor": "^3.0.4",
+    "if-env": "^1.0.0",
+    "node-sass": "^4.13.1",
+    "preact-cli": "^3.0.0-rc.6",
+    "sass-loader": "^8.0.2",
+    "sirv-cli": "^0.4.5"
+  },
+  "dependencies": {
+    "preact": "^10.1.0",
+    "preact-render-to-string": "^5.1.2"
   }
 }
