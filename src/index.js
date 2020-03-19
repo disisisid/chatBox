@@ -3,6 +3,9 @@ import "./style";
 import { Component, render } from "preact";
 import { ChatBox } from "./chatBox";
 import data from "./data.json";
+import io from "socket.io-client";
+
+const socket = io('http://localhost:3000');
 
 export default class App extends Component {
   constructor() {
@@ -24,7 +27,16 @@ export default class App extends Component {
       ),
        user: {"avatar":"https://i.pravatar.cc/400?img=9","userName":"Sid","userId":0}
     };
-    console.log(JSON.stringify(this.state.users));
+
+    socket.on('chat-message', data => {
+      console.log(data);
+      this.setState({
+        data: [...this.state.data, data]
+      }, () => {
+        var element = document.querySelector(".chatBox");
+        element.scrollTop = element.scrollHeight;
+      });
+    });
   }
 
   typingMessage = event => {
@@ -32,22 +44,21 @@ export default class App extends Component {
       message: event.target.value
     });
     if (event.keyCode === 13) {
+      var messagePayload = {
+        userId: this.state.user.userId,
+        userName: this.state.user.userName,
+        message: this.state.message,
+        time: new Date()
+          .toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true
+          })
+          .toLowerCase()
+      };
+      socket.emit('send-chat-message', messagePayload);
       this.setState({
-        data: [
-          ...this.state.data,
-          {
-            userId: this.state.user.userId,
-            userName: this.state.user.userName,
-            message: this.state.message,
-            time: new Date()
-              .toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true
-              })
-              .toLowerCase()
-          }
-        ],
+        data: [ ...this.state.data, messagePayload ],
         message: ""
       }, () => {
         var element = document.querySelector(".chatBox");
@@ -57,11 +68,13 @@ export default class App extends Component {
   };
 
   switchUser = data => {
-    console.log(data);
+    // console.log(data);
     this.setState({
       user: data
     })
   }
+
+  componentDidUpdate(){}
 
 
   render(props) {
@@ -89,6 +102,5 @@ export default class App extends Component {
     );
   }
 }
-
 
 
