@@ -1,10 +1,15 @@
-// import "preact/debug";
 import "./style";
 import { Component, render } from "preact";
 import { ChatBox } from "./components/chatBox/ChatBox";
 import data from "./data.json";
+import io from "socket.io-client";
 import { Link } from 'preact-router/match'
 import routes from './routes'
+const socket = io('http://localhost:3000');
+
+
+
+
 
 export default class App extends Component {
   constructor() {
