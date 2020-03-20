@@ -80,24 +80,28 @@ export default class App extends Component {
   render(props) {
     return (
       <div class="main-container">
-        <div class="user">Logged in as: {this.state.user.userName}</div>
-        <div class="selectUser">
-          {Object.keys(this.state.users).map(u => this.state.users[u]).map(e => (<span onclick={this.switchUser.bind(this, e)}>{e.userName}</span>))}
-        </div>
-        <div class="app-header">sl@ck</div>
-
-        <div class="chat-container">
-          <ChatBox chats={this.state.data} users={this.state.users} />
-          <div class="typeBox">
-            <input
-              name="message"
-              value={this.state.message}
-              onKeyUp={this.typingMessage.bind(this)}
-              placeholder="Type Message"
-              autofocus
-            />
+        <div style={{width: '45%'}}>
+          <div class="user">
+            <span>Logged in as: {this.state.user.userName}</span>
+            <div class="selectUser">
+              {Object.keys(this.state.users).map(u => this.state.users[u]).map(e => (<span onclick={this.switchUser.bind(this, e)}>{e.userName}</span>))}
+            </div>
           </div>
+          <div class="app-header">sl@ck</div>
+          <ChatBox chats={this.state.data} users={this.state.users} />
+          <input
+            class="typeBox"
+            name="message"
+            value={this.state.message}
+            onKeyUp={this.typingMessage.bind(this)}
+            placeholder="Type Message"
+            autofocus
+          />
         </div>
+
+        {/*  Testing for login component */}
+        <Link href="/login">Login</Link>
+        {routes}
       </div>
     );
   }
