@@ -1,7 +1,7 @@
 // import "preact/debug";
 import "./style";
 import { Component, render } from "preact";
-import { ChatBox } from "./chatBox";
+import { ChatBox } from "./components/chatBox/ChatBox";
 import data from "./data.json";
 import io from "socket.io-client";
 
@@ -100,8 +100,8 @@ export default class App extends Component {
         </div>
 
         {/*  Testing for login component */}
-        <Link href="/login">Login</Link>
-        {routes}
+        {/* <Link href="/login">Login</Link> */}
+        {/* {routes} */}
       </div>
     );
   }
