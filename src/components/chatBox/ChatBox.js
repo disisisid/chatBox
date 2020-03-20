@@ -1,4 +1,5 @@
 // const Base64 = require("js-base64").Base64;
+import '../../style/chatBox.css'
 
 export const ChatBox = ({ chats, users }) => {
   // console.log(result);
@@ -16,11 +17,13 @@ export const ChatBox = ({ chats, users }) => {
               <span class="avatar">
                 <img src={users[result.userId].avatar} alt="no avatar" />
               </span>
-              <span class="chat">
-                <div class="userName">{result.userName}</div>
-                <span class="timeStamp">{result.time}</span>
+              <div class="chat">
+                <div class="user_profile_info">
+                  <span><strong>{result.userName}</strong></span>
+                  <span>{result.time}</span>
+                </div>
                 <div class="message">{result.message}</div>
-              </span>
+              </div>
             </div>
           );
         })}
@@ -28,3 +31,4 @@ export const ChatBox = ({ chats, users }) => {
     </div>
   );
 };
+

@@ -1,0 +1,28 @@
+.chatBox {
+	max-height: 484px;
+	overflow: scroll;
+}
+
+.chat {
+	display: flex;
+	flex-direction: column;
+	margin-left: 8px;
+	width: 100%;
+}
+
+.messageBox {
+	margin-bottom: 12px;
+	display: flex;
+	flex-direction: row;
+}
+
+.avatar img {
+	height: 40px;
+	width: 40px;
+}
+
+.user_profile_info {
+	width: 7rem;
+	display: flex;
+	justify-content: space-between;
+}
