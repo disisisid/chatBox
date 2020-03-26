@@ -1,0 +1,41 @@
+.auth_container {
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  justify-content: space-between;
+}
+
+.auth_items > input {
+  height: 35px;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid lightgrey;
+}
+
+.auth_control_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth_control_container > button {
+  height: 35px;
+  font-size: 14px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.auth_control_container > button:nth-child(1):hover {
+  background-color: #009f9e;
+}
+
+.auth_control_container > button:nth-child(2) {
+  background-color: white;
+}
+
+.auth_control_container > button:nth-child(2):hover {
+  background-color: lightcoral;
+}
