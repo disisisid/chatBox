@@ -7,6 +7,7 @@
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
     "serve": "preact build && sirv build --cors --single",
+    "deploy": "gh-pages -d build",
     "dev": "preact watch",
     "lint": "eslint src"
   },
@@ -21,14 +22,13 @@
     "eslint-config-synacor": "^3.0.4",
     "if-env": "^1.0.0",
     "node-sass": "^4.13.1",
-    "preact-cli": "^3.0.0-rc.6",
     "sass-loader": "^8.0.2",
     "sirv-cli": "^0.4.5"
   },
   "dependencies": {
     "preact": "^10.1.0",
     "preact-render-to-string": "^5.1.2",
-    "socket.io-client": "^2.3.0",
-    "preact-router": "^3.2.1"
+    "preact-router": "^3.2.1",
+    "socket.io-client": "^2.3.0"
   }
 }
