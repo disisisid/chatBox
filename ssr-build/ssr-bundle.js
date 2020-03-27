@@ -4461,57 +4461,10 @@ var preact_min_default = /*#__PURE__*/__webpack_require__.n(preact_min);
 var style = __webpack_require__("rq4c");
 var style_default = /*#__PURE__*/__webpack_require__.n(style);
 
-// CONCATENATED MODULE: ./chatBox.js
+// EXTERNAL MODULE: ./style/chatBox.css
+var chatBox = __webpack_require__("gXoY");
+var chatBox_default = /*#__PURE__*/__webpack_require__.n(chatBox);
 
-// const Base64 = require("js-base64").Base64;
-
-var chatBox_ChatBox = function ChatBox(_ref) {
-  var chats = _ref.chats,
-      users = _ref.users;
-
-  // console.log(result);
-  // items = result.map(r => '<div>bye</div>')
-  return Object(preact_min["h"])(
-    "div",
-    { "class": "chatBox" },
-    Object(preact_min["h"])(
-      "div",
-      null,
-      chats.map(function (result) {
-        return Object(preact_min["h"])(
-          "div",
-          {
-            "class": result.userId === 0 ? "messageBox  me" : "messageBox notMe"
-          },
-          Object(preact_min["h"])(
-            "span",
-            { "class": "avatar" },
-            Object(preact_min["h"])("img", { src: users[result.userId].avatar, alt: "no avatar" })
-          ),
-          Object(preact_min["h"])(
-            "span",
-            { "class": "chat" },
-            Object(preact_min["h"])(
-              "div",
-              { "class": "userName" },
-              result.userName
-            ),
-            Object(preact_min["h"])(
-              "span",
-              { "class": "timeStamp" },
-              result.time
-            ),
-            Object(preact_min["h"])(
-              "div",
-              { "class": "message" },
-              result.message
-            )
-          )
-        );
-      })
-    )
-  );
-};
 // EXTERNAL MODULE: ./data.json
 var data = __webpack_require__("wAIJ");
 var data_default = /*#__PURE__*/__webpack_require__.n(data);
@@ -4520,8 +4473,7 @@ var data_default = /*#__PURE__*/__webpack_require__.n(data);
 var lib = __webpack_require__("+1g+");
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
-// CONCATENATED MODULE: ./index.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return index_App; });
+// CONCATENATED MODULE: ./components/chatBox/ChatBox.js
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4530,8 +4482,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import "preact/debug";
-
+// const Base64 = require("js-base64").Base64;
 
 
 
@@ -4539,59 +4490,86 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var socket = lib_default()('http://localhost:3000');
 
-var index__ref = Object(preact_min["h"])(
-  "div",
-  { "class": "app-header" },
-  "sl@ck"
+// export const ChatBox = ({ chats, users }) => {
+//   // console.log(result);
+//   // items = result.map(r => '<div>bye</div>')
+//   return (
+//     <div class="chatBox">
+//       <div>
+//         {chats.map(result => {
+//           return (
+//             <div
+//               class={
+//                 result.userId === 0 ? "messageBox  me" : "messageBox notMe"
+//               }
+//             >
+//               <span class="avatar">
+//                 <img src={users[result.userId].avatar} alt="no avatar" />
+//               </span>
+//               <div class="chat">
+//                 <div class="user_profile_info">
+//                   <span><strong>{result.userName}</strong></span>
+//                   <span>{result.time}</span>
+//                 </div>
+//                 <div class="message">{result.message}</div>
+//               </div>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// };
+
+var _ref = Object(preact_min["h"])(
+  'div',
+  { 'class': 'app-header' },
+  'sl@ck'
 );
 
-var _ref2 = Object(preact_min["h"])("div", { "class": "left-panel" });
+var ChatBox_ChatBox = function (_Component) {
+  _inherits(ChatBox, _Component);
 
-var index_App = function (_Component) {
-  _inherits(App, _Component);
+  function ChatBox(props) {
+    _classCallCheck(this, ChatBox);
 
-  function App() {
-    _classCallCheck(this, App);
-
-    var _this = _possibleConstructorReturn(this, _Component.call(this));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
     _this.typingMessage = function (event) {
       _this.setState({
         message: event.target.value
       });
       if (event.keyCode === 13) {
-        if (event.target.value) {
-          var messagePayload = {
-            userId: _this.state.user.userId,
-            userName: _this.state.user.userName,
-            message: _this.state.message,
-            time: new Date().toLocaleString("en-US", {
-              hour: "numeric",
-              minute: "numeric",
-              hour12: true
-            }).toLowerCase()
-          };
-          socket.emit('send-chat-message', messagePayload);
-          _this.setState({
-            data: [].concat(_this.state.data, [messagePayload]),
-            message: ""
-          }, function () {
-            var element = document.querySelector(".chatBox");
-            element.scrollTop = element.scrollHeight;
-          });
-        }
+        var messagePayload = {
+          userId: _this.state.user.userId,
+          userName: _this.state.user.userName,
+          message: _this.state.message,
+          time: new Date().toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true
+          }).toLowerCase()
+        };
+        socket.emit('send-chat-message', messagePayload);
+        _this.setState({
+          chatMessageLog: [].concat(_this.state.chatMessageLog, [messagePayload]),
+          message: ""
+        }, function () {
+          var element = document.querySelector(".chatBox");
+          element.scrollTop = element.scrollHeight;
+        });
       }
     };
 
     _this.switchUser = function (data) {
-      // console.log(data);
+      console.log(data);
       _this.setState({
         user: data
       });
     };
 
     _this.state = {
-      data: data_default.a,
+      chatMessageLog: data_default.a,
       message: "",
       users: Array.from(new Set(data_default.a.map(function (o) {
         return [o.userName, o.userId];
@@ -4605,64 +4583,851 @@ var index_App = function (_Component) {
       }, {}),
       user: { "avatar": "https://i.pravatar.cc/400?img=9", "userName": "Sid", "userId": 0 }
     };
-
     socket.on('chat-message', function (data) {
       console.log(data);
       _this.setState({
-        data: [].concat(_this.state.data, [data])
+        chatMessageLog: [].concat(_this.state.chatMessageLog, [data])
       }, function () {
         var element = document.querySelector(".chatBox");
         element.scrollTop = element.scrollHeight;
       });
     });
+    console.log(JSON.stringify(_this.state.users));
     return _this;
   }
 
-  App.prototype.componentDidUpdate = function componentDidUpdate() {};
-
-  App.prototype.render = function render(props) {
+  ChatBox.prototype.render = function render() {
     var _this2 = this;
 
     return Object(preact_min["h"])(
-      "div",
-      { "class": "main-container" },
+      'div',
+      { 'class': 'chatBox_container' },
       Object(preact_min["h"])(
-        "div",
-        { "class": "user" },
-        "Logged in as: ",
-        this.state.user.userName
-      ),
-      Object(preact_min["h"])(
-        "div",
-        { "class": "selectUser" },
-        Object.keys(this.state.users).map(function (u) {
-          return _this2.state.users[u];
-        }).map(function (e) {
-          return Object(preact_min["h"])(
-            "span",
-            { onclick: _this2.switchUser.bind(_this2, e) },
-            e.userName
-          );
-        })
-      ),
-      index__ref,
-      Object(preact_min["h"])(
-        "div",
-        { "class": "chat-container" },
-        _ref2,
-        Object(preact_min["h"])(chatBox_ChatBox, { chats: this.state.data, users: this.state.users }),
+        'div',
+        { 'class': 'user' },
         Object(preact_min["h"])(
-          "div",
-          { "class": "typeBox" },
-          Object(preact_min["h"])("input", {
-            name: "message",
+          'span',
+          null,
+          'Logged in as: ',
+          this.state.user.userName
+        ),
+        Object(preact_min["h"])(
+          'div',
+          { 'class': 'selectUser' },
+          Object.keys(this.state.users).map(function (u) {
+            return _this2.state.users[u];
+          }).map(function (e) {
+            return Object(preact_min["h"])(
+              'span',
+              { onclick: _this2.switchUser.bind(_this2, e) },
+              e.userName
+            );
+          })
+        )
+      ),
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'newContainer' },
+        _ref,
+        Object(preact_min["h"])(
+          'div',
+          { 'class': 'chatBox' },
+          Object(preact_min["h"])(
+            'div',
+            null,
+            this.state.chatMessageLog.map(function (result) {
+              return Object(preact_min["h"])(
+                'div',
+                {
+                  'class': result.userId === 0 ? "messageBox  me" : "messageBox notMe"
+                },
+                Object(preact_min["h"])(
+                  'span',
+                  { 'class': 'avatar' },
+                  Object(preact_min["h"])('img', { src: _this2.state.users[result.userId].avatar, alt: 'no avatar' })
+                ),
+                Object(preact_min["h"])(
+                  'div',
+                  { 'class': 'chat' },
+                  Object(preact_min["h"])(
+                    'div',
+                    { 'class': 'user_profile_info' },
+                    Object(preact_min["h"])(
+                      'span',
+                      null,
+                      Object(preact_min["h"])(
+                        'strong',
+                        null,
+                        result.userName
+                      )
+                    ),
+                    Object(preact_min["h"])(
+                      'span',
+                      { 'class': 'timeStamp' },
+                      result.time
+                    )
+                  ),
+                  Object(preact_min["h"])(
+                    'div',
+                    { 'class': 'message' },
+                    result.message
+                  )
+                )
+              );
+            })
+          )
+        ),
+        Object(preact_min["h"])(
+          'div',
+          { 'class': 'typeBox' },
+          Object(preact_min["h"])('input', {
+            name: 'typeMessage',
             value: this.state.message,
-            onKeyUp: this.typingMessage.bind(this),
-            placeholder: "Type Message",
+            onKeyUp: this.typingMessage,
+            placeholder: 'Type Message',
             autofocus: true
           })
         )
       )
+    );
+  };
+
+  return ChatBox;
+}(preact_min["Component"]);
+
+/* harmony default export */ var chatBox_ChatBox = (ChatBox_ChatBox);
+// CONCATENATED MODULE: ../node_modules/preact-router/dist/preact-router.es.js
+
+
+var EMPTY$1 = {};
+
+function preact_router_es_assign(obj, props) {
+	// eslint-disable-next-line guard-for-in
+	for (var i in props) {
+		obj[i] = props[i];
+	}
+	return obj;
+}
+
+function exec(url, route, opts) {
+	var reg = /(?:\?([^#]*))?(#.*)?$/,
+	    c = url.match(reg),
+	    matches = {},
+	    ret;
+	if (c && c[1]) {
+		var p = c[1].split('&');
+		for (var i = 0; i < p.length; i++) {
+			var r = p[i].split('=');
+			matches[decodeURIComponent(r[0])] = decodeURIComponent(r.slice(1).join('='));
+		}
+	}
+	url = segmentize(url.replace(reg, ''));
+	route = segmentize(route || '');
+	var max = Math.max(url.length, route.length);
+	for (var i$1 = 0; i$1 < max; i$1++) {
+		if (route[i$1] && route[i$1].charAt(0) === ':') {
+			var param = route[i$1].replace(/(^:|[+*?]+$)/g, ''),
+			    flags = (route[i$1].match(/[+*?]+$/) || EMPTY$1)[0] || '',
+			    plus = ~flags.indexOf('+'),
+			    star = ~flags.indexOf('*'),
+			    val = url[i$1] || '';
+			if (!val && !star && (flags.indexOf('?') < 0 || plus)) {
+				ret = false;
+				break;
+			}
+			matches[param] = decodeURIComponent(val);
+			if (plus || star) {
+				matches[param] = url.slice(i$1).map(decodeURIComponent).join('/');
+				break;
+			}
+		} else if (route[i$1] !== url[i$1]) {
+			ret = false;
+			break;
+		}
+	}
+	if (opts.default !== true && ret === false) {
+		return false;
+	}
+	return matches;
+}
+
+function pathRankSort(a, b) {
+	return a.rank < b.rank ? 1 : a.rank > b.rank ? -1 : a.index - b.index;
+}
+
+// filter out VNodes without attributes (which are unrankeable), and add `index`/`rank` properties to be used in sorting.
+function prepareVNodeForRanking(vnode, index) {
+	vnode.index = index;
+	vnode.rank = rankChild(vnode);
+	return vnode.props;
+}
+
+function segmentize(url) {
+	return url.replace(/(^\/+|\/+$)/g, '').split('/');
+}
+
+function rankSegment(segment) {
+	return segment.charAt(0) == ':' ? 1 + '*+?'.indexOf(segment.charAt(segment.length - 1)) || 4 : 5;
+}
+
+function rank(path) {
+	return segmentize(path).map(rankSegment).join('');
+}
+
+function rankChild(vnode) {
+	return vnode.props.default ? 0 : rank(vnode.props.path);
+}
+
+var customHistory = null;
+
+var ROUTERS = [];
+
+var subscribers = [];
+
+var EMPTY = {};
+
+function setUrl(url, type) {
+	if (type === void 0) type = 'push';
+
+	if (customHistory && customHistory[type]) {
+		customHistory[type](url);
+	} else if (typeof history !== 'undefined' && history[type + 'State']) {
+		history[type + 'State'](null, null, url);
+	}
+}
+
+function getCurrentUrl() {
+	var url;
+	if (customHistory && customHistory.location) {
+		url = customHistory.location;
+	} else if (customHistory && customHistory.getCurrentLocation) {
+		url = customHistory.getCurrentLocation();
+	} else {
+		url = typeof location !== 'undefined' ? location : EMPTY;
+	}
+	return "" + (url.pathname || '') + (url.search || '');
+}
+
+function route(url, replace) {
+	if (replace === void 0) replace = false;
+
+	if (typeof url !== 'string' && url.url) {
+		replace = url.replace;
+		url = url.url;
+	}
+
+	// only push URL into history if we can handle it
+	if (preact_router_es_canRoute(url)) {
+		setUrl(url, replace ? 'replace' : 'push');
+	}
+
+	return routeTo(url);
+}
+
+/** Check if the given URL can be handled by any router instances. */
+function preact_router_es_canRoute(url) {
+	for (var i = ROUTERS.length; i--;) {
+		if (ROUTERS[i].canRoute(url)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/** Tell all router instances to handle the given URL.  */
+function routeTo(url) {
+	var didRoute = false;
+	for (var i = 0; i < ROUTERS.length; i++) {
+		if (ROUTERS[i].routeTo(url) === true) {
+			didRoute = true;
+		}
+	}
+	for (var i$1 = subscribers.length; i$1--;) {
+		subscribers[i$1](url);
+	}
+	return didRoute;
+}
+
+function routeFromLink(node) {
+	// only valid elements
+	if (!node || !node.getAttribute) {
+		return;
+	}
+
+	var href = node.getAttribute('href'),
+	    target = node.getAttribute('target');
+
+	// ignore links with targets and non-path URLs
+	if (!href || !href.match(/^\//g) || target && !target.match(/^_?self$/i)) {
+		return;
+	}
+
+	// attempt to route, if no match simply cede control to browser
+	return route(href);
+}
+
+function handleLinkClick(e) {
+	if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.button !== 0) {
+		return;
+	}
+	routeFromLink(e.currentTarget || e.target || this);
+	return prevent(e);
+}
+
+function prevent(e) {
+	if (e) {
+		if (e.stopImmediatePropagation) {
+			e.stopImmediatePropagation();
+		}
+		if (e.stopPropagation) {
+			e.stopPropagation();
+		}
+		e.preventDefault();
+	}
+	return false;
+}
+
+function delegateLinkHandler(e) {
+	// ignore events the browser takes care of already:
+	if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.button !== 0) {
+		return;
+	}
+
+	var t = e.target;
+	do {
+		if (String(t.nodeName).toUpperCase() === 'A' && t.getAttribute('href')) {
+			if (t.hasAttribute('native')) {
+				return;
+			}
+			// if link is handled by the router, prevent browser defaults
+			if (routeFromLink(t)) {
+				return prevent(e);
+			}
+		}
+	} while (t = t.parentNode);
+}
+
+var eventListenersInitialized = false;
+
+function initEventListeners() {
+	if (eventListenersInitialized) {
+		return;
+	}
+
+	if (typeof addEventListener === 'function') {
+		if (!customHistory) {
+			addEventListener('popstate', function () {
+				routeTo(getCurrentUrl());
+			});
+		}
+		addEventListener('click', delegateLinkHandler);
+	}
+	eventListenersInitialized = true;
+}
+
+var preact_router_es_Router = function (Component$$1) {
+	function Router(props) {
+		Component$$1.call(this, props);
+		if (props.history) {
+			customHistory = props.history;
+		}
+
+		this.state = {
+			url: props.url || getCurrentUrl()
+		};
+
+		initEventListeners();
+	}
+
+	if (Component$$1) Router.__proto__ = Component$$1;
+	Router.prototype = Object.create(Component$$1 && Component$$1.prototype);
+	Router.prototype.constructor = Router;
+
+	Router.prototype.shouldComponentUpdate = function shouldComponentUpdate(props) {
+		if (props.static !== true) {
+			return true;
+		}
+		return props.url !== this.props.url || props.onChange !== this.props.onChange;
+	};
+
+	/** Check if the given URL can be matched against any children */
+	Router.prototype.canRoute = function canRoute(url) {
+		var children = Object(preact_min["toChildArray"])(this.props.children);
+		return this.getMatchingChildren(children, url, false).length > 0;
+	};
+
+	/** Re-render children with a new URL to match against. */
+	Router.prototype.routeTo = function routeTo(url) {
+		this.setState({ url: url });
+
+		var didRoute = this.canRoute(url);
+
+		// trigger a manual re-route if we're not in the middle of an update:
+		if (!this.updating) {
+			this.forceUpdate();
+		}
+
+		return didRoute;
+	};
+
+	Router.prototype.componentWillMount = function componentWillMount() {
+		ROUTERS.push(this);
+		this.updating = true;
+	};
+
+	Router.prototype.componentDidMount = function componentDidMount() {
+		var this$1 = this;
+
+		if (customHistory) {
+			this.unlisten = customHistory.listen(function (location) {
+				this$1.routeTo("" + (location.pathname || '') + (location.search || ''));
+			});
+		}
+		this.updating = false;
+	};
+
+	Router.prototype.componentWillUnmount = function componentWillUnmount() {
+		if (typeof this.unlisten === 'function') {
+			this.unlisten();
+		}
+		ROUTERS.splice(ROUTERS.indexOf(this), 1);
+	};
+
+	Router.prototype.componentWillUpdate = function componentWillUpdate() {
+		this.updating = true;
+	};
+
+	Router.prototype.componentDidUpdate = function componentDidUpdate() {
+		this.updating = false;
+	};
+
+	Router.prototype.getMatchingChildren = function getMatchingChildren(children, url, invoke) {
+		return children.filter(prepareVNodeForRanking).sort(pathRankSort).map(function (vnode) {
+			var matches = exec(url, vnode.props.path, vnode.props);
+			if (matches) {
+				if (invoke !== false) {
+					var newProps = { url: url, matches: matches };
+					preact_router_es_assign(newProps, matches);
+					delete newProps.ref;
+					delete newProps.key;
+					return Object(preact_min["cloneElement"])(vnode, newProps);
+				}
+				return vnode;
+			}
+		}).filter(Boolean);
+	};
+
+	Router.prototype.render = function render(ref, ref$1) {
+		var children = ref.children;
+		var onChange = ref.onChange;
+		var url = ref$1.url;
+
+		var active = this.getMatchingChildren(Object(preact_min["toChildArray"])(children), url, true);
+
+		var current = active[0] || null;
+
+		var previous = this.previousUrl;
+		if (url !== previous) {
+			this.previousUrl = url;
+			if (typeof onChange === 'function') {
+				onChange({
+					router: this,
+					url: url,
+					previous: previous,
+					active: active,
+					current: current
+				});
+			}
+		}
+
+		return current;
+	};
+
+	return Router;
+}(preact_min["Component"]);
+
+var preact_router_es_Link = function Link(props) {
+	return Object(preact_min["createElement"])('a', preact_router_es_assign({ onClick: handleLinkClick }, props));
+};
+
+var preact_router_es_Route = function Route(props) {
+	return Object(preact_min["createElement"])(props.component, props);
+};
+
+preact_router_es_Router.subscribers = subscribers;
+preact_router_es_Router.getCurrentUrl = getCurrentUrl;
+preact_router_es_Router.route = route;
+preact_router_es_Router.Router = preact_router_es_Router;
+preact_router_es_Router.Route = preact_router_es_Route;
+preact_router_es_Router.Link = preact_router_es_Link;
+preact_router_es_Router.exec = exec;
+
+/* harmony default export */ var preact_router_es = (preact_router_es_Router);
+//# sourceMappingURL=preact-router.es.js.map
+// EXTERNAL MODULE: ./style/auth.css
+var auth = __webpack_require__("v5VA");
+var auth_default = /*#__PURE__*/__webpack_require__.n(auth);
+
+// CONCATENATED MODULE: ./components/auth/Login.js
+
+
+function Login__classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Login__possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function Login__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var Login__ref = Object(preact_min["h"])(
+  'h1',
+  null,
+  'Login with your Account'
+);
+
+var _ref2 = Object(preact_min["h"])(
+  'h2',
+  null,
+  'Enter username:'
+);
+
+var _ref3 = Object(preact_min["h"])(
+  'h3',
+  null,
+  'Enter password:'
+);
+
+var Login_Login = function (_Component) {
+  Login__inherits(Login, _Component);
+
+  function Login() {
+    var _temp, _this, _ret;
+
+    Login__classCallCheck(this, Login);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = Login__possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      username: '',
+      password: ''
+    }, _this.handleSetUserInfo = function (event) {
+      var _this$setState;
+
+      _this.setState((_this$setState = {}, _this$setState[event.target.name] = event.target.value, _this$setState));
+    }, _this.handleRouteToSignUp = function () {
+      route({
+        url: urlPath.sign_up
+      });
+    }, _temp), Login__possibleConstructorReturn(_this, _ret);
+  }
+
+  /** Check user input is vaild or not before route */
+  Login.prototype.handleCheckAuth = function handleCheckAuth() {
+
+    // LOGIC TO CHECK USER INPUT
+
+    // if (this.state.username !== '' && this.state.password) {
+    //   // Route to chatbox component
+    //   route({
+    //     url: urlPath.chat_room
+    //   })
+    // } else {
+    //   // Error
+    //   alert('Please try again.')
+    // }
+
+    route({
+      url: urlPath.chat_room
+    });
+  };
+
+  Login.prototype.render = function render() {
+    return Object(preact_min["h"])(
+      'form',
+      { 'class': 'auth_container' },
+      Login__ref,
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_items' },
+        _ref2,
+        Object(preact_min["h"])('input', { type: 'text', name: 'username', placeholder: 'Enter username...', oninput: this.handleSetUserInfo })
+      ),
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_items' },
+        _ref3,
+        Object(preact_min["h"])('input', { type: 'password', name: 'password', placeholder: 'Enter password...', oninput: this.handleSetUserInfo })
+      ),
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_control_container' },
+        Object(preact_min["h"])(
+          'button',
+          { type: 'submit', onclick: this.handleCheckAuth },
+          'Login'
+        ),
+        Object(preact_min["h"])(
+          'button',
+          { onclick: this.handleRouteToSignUp },
+          'New? Sign up'
+        )
+      )
+    );
+  };
+
+  return Login;
+}(preact_min["Component"]);
+
+/* harmony default export */ var auth_Login = (Login_Login);
+// CONCATENATED MODULE: ./components/auth/SignUp.js
+
+
+function SignUp__classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SignUp__possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function SignUp__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var SignUp__ref = Object(preact_min["h"])(
+  'h1',
+  null,
+  'Create a new Account'
+);
+
+var SignUp__ref2 = Object(preact_min["h"])(
+  'h2',
+  null,
+  'Enter username:'
+);
+
+var SignUp__ref3 = Object(preact_min["h"])(
+  'h3',
+  null,
+  'Enter password:'
+);
+
+var SignUp_SignUp = function (_Component) {
+  SignUp__inherits(SignUp, _Component);
+
+  function SignUp() {
+    var _temp, _this, _ret;
+
+    SignUp__classCallCheck(this, SignUp);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = SignUp__possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+      username: '',
+      password: ''
+    }, _this.handleSetUserInfo = function (event) {
+      var _this$setState;
+
+      _this.setState((_this$setState = {}, _this$setState[event.target.name] = event.target.value, _this$setState));
+    }, _this.handleRouteToLoginIn = function () {
+      route({
+        url: urlPath.home
+      });
+    }, _temp), SignUp__possibleConstructorReturn(_this, _ret);
+  }
+
+  /** Check user input is vaild or not before route */
+  SignUp.prototype.handleCheckAuth = function handleCheckAuth() {
+
+    // LOGIC TO CHECK USER INPUT
+
+    // if (this.state.username !== '' && this.state.password) {
+    //   // Route to chatbox component
+    //   route({
+    //     url: urlPath.chat_room
+    //   })
+    // } else {
+    //   // Error
+    //   alert('Please try again.')
+    // }
+
+    route({
+      url: urlPath.chat_room
+    });
+  };
+
+  SignUp.prototype.render = function render() {
+    return Object(preact_min["h"])(
+      'form',
+      { 'class': 'auth_container' },
+      SignUp__ref,
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_items' },
+        SignUp__ref2,
+        Object(preact_min["h"])('input', { type: 'text', name: 'username', placeholder: 'Enter username...', oninput: this.handleSetUserInfo })
+      ),
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_items' },
+        SignUp__ref3,
+        Object(preact_min["h"])('input', { type: 'password', name: 'password', placeholder: 'Enter password...', oninput: this.handleSetUserInfo })
+      ),
+      Object(preact_min["h"])(
+        'div',
+        { 'class': 'auth_control_container' },
+        Object(preact_min["h"])(
+          'button',
+          { type: 'submit', onclick: this.handleCheckAuth },
+          'Create account'
+        ),
+        Object(preact_min["h"])(
+          'button',
+          { onclick: this.handleRouteToLoginIn },
+          'I already have an account'
+        )
+      )
+    );
+  };
+
+  return SignUp;
+}(preact_min["Component"]);
+
+/* harmony default export */ var auth_SignUp = (SignUp_SignUp);
+// CONCATENATED MODULE: ./routes.js
+
+
+
+
+
+
+
+var urlPath = {
+  home: '/',
+  sign_up: '/sign_up',
+  chat_room: '/chat_room'
+};
+
+var routes = Object(preact_min["h"])(
+  preact_router_es_Router,
+  null,
+  Object(preact_min["h"])(auth_Login, { path: urlPath.home }),
+  Object(preact_min["h"])(auth_SignUp, { path: urlPath.sign_up }),
+  Object(preact_min["h"])(chatBox_ChatBox, { path: urlPath.chat_room })
+);
+
+/* harmony default export */ var routes_0 = (routes);
+
+
+// CONCATENATED MODULE: ./index.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return index_App; });
+
+
+function index__classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function index__possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function index__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import "preact/debug";
+
+
+
+// import data from "./data.json";
+// import io from "socket.io-client";
+
+
+// const socket = io('http://localhost:3000');
+
+var index_App = function (_Component) {
+  index__inherits(App, _Component);
+
+  function App() {
+    index__classCallCheck(this, App);
+
+    return index__possibleConstructorReturn(this, _Component.apply(this, arguments));
+  }
+
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     data: data,
+  //     message: "",
+  //     users: Array.from(new Set(data.map(o => [o.userName, o.userId]))).reduce(
+  //       (acc, v) => {
+  //         acc[v[1]] = {
+  //           avatar:
+  //             "https://i.pravatar.cc/400?img=" + Math.floor(Math.random() * 70),
+  //           userName: v[0],
+  //           userId: v[1]
+  //         };
+  //         return acc;
+  //       },
+  //       {}
+  //     ),
+  //      user: {"avatar":"https://i.pravatar.cc/400?img=9","userName":"Sid","userId":0}
+  //   };
+
+  //   socket.on('chat-message', data => {
+  //     console.log(data);
+  //     this.setState({
+  //       data: [...this.state.data, data]
+  //     }, () => {
+  //       var element = document.querySelector(".chatBox");
+  //       element.scrollTop = element.scrollHeight;
+  //     });
+  //   });
+  // }
+
+  // typingMessage = event => {
+  //   this.setState({
+  //     message: event.target.value
+  //   });
+  //   if (event.keyCode === 13) {
+  //     var messagePayload = {
+  //       userId: this.state.user.userId,
+  //       userName: this.state.user.userName,
+  //       message: this.state.message,
+  //       time: new Date()
+  //         .toLocaleString("en-US", {
+  //           hour: "numeric",
+  //           minute: "numeric",
+  //           hour12: true
+  //         })
+  //         .toLowerCase()
+  //     };
+  //     socket.emit('send-chat-message', messagePayload);
+  //     this.setState({
+  //       data: [ ...this.state.data, messagePayload ],
+  //       message: ""
+  //     }, () => {
+  //       var element = document.querySelector(".chatBox");
+  //       element.scrollTop = element.scrollHeight;
+  //     });
+  //   }
+  // };
+
+  // switchUser = data => {
+  //   // console.log(data);
+  //   this.setState({
+  //     user: data
+  //   })
+  // }
+
+  // componentDidUpdate(){}
+
+
+  App.prototype.render = function render() {
+    return Object(preact_min["h"])(
+      "div",
+      { "class": "main-container" },
+      routes_0
     );
   };
 
@@ -7931,6 +8696,13 @@ module.exports = WebSocket;
 /***/ (function(module, exports) {
 
 module.exports = require("http");
+
+/***/ }),
+
+/***/ "gXoY":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -11240,6 +12012,13 @@ function unloadHandler() {
     }
   }
 }
+
+/***/ }),
+
+/***/ "v5VA":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
