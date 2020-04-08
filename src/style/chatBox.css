@@ -30,7 +30,7 @@
 
 .chatBox {
 	max-height: 484px;
-	overflow: scroll;
+	overflow: auto;
 	padding: 10px;
 	border-bottom: 1px solid lightgrey;
 }
@@ -45,17 +45,17 @@
 	flex-direction: column;
 	margin-left: 8px;
 	width: 100%;
-	position: relative;
 }
 
 .message{
-	position: absolute;
-  bottom: 0;
+	/* position: absolute; */
+  /* bottom: 0; */
 }
 
 .user_profile_info {
 	width: 12rem;
 	display: flex;
+	margin-bottom: 8px;
 }
 
 .messageBox {
